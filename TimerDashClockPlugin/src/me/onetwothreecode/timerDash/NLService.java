@@ -8,6 +8,8 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
@@ -18,6 +20,8 @@ public class NLService extends NotificationListenerService {
 	private NLServiceReceiver nlservicereciver;
 	public static final String INTENT_NOTIFY_SERVICE="me.onetwothreecode.timerDash.NOTIFICATION_LISTENER_SERVICE";
 	public static final String INTENT_NOTIFY_EXTENSION="me.onetwothreecode.timerDash.NOTIFICATION_EXTENSION_LISTENER";
+	public static final String INTENT_LAUNCH_CLOCK="me.onetwothreecode.timerDash.LAUNCH_CLOCK_RECIEVER";
+	
 	
 	@Override
 	public void onCreate() {
@@ -38,7 +42,7 @@ public class NLService extends NotificationListenerService {
 	public void onNotificationPosted(StatusBarNotification sbn) {
 
 		if (sbn.getPackageName().equalsIgnoreCase("com.android.deskclock")) {
-
+			
 			Notification notification = sbn.getNotification();
 			String notifText = notification.extras
 					.getString(Notification.EXTRA_TEXT);
@@ -69,13 +73,15 @@ public class NLService extends NotificationListenerService {
 			if (TimerDashExtension.TimerNotificationType.fromString(iconName) != TimerDashExtension.TimerNotificationType.STOPWATCH) {
 				Intent i = new Intent(
 						NLService.INTENT_NOTIFY_EXTENSION);
-				i.putExtra("notification_event", "Clock notification :"
-						+ notifTitle + ": " + notifText + "\n");
+				
+				//i.putExtra("notification_event", "Clock notification :"+ notifTitle + ": " + notifText + "\n");
 				i.putExtra("clockTitle", notifTitle);
 				i.putExtra("clockStatus", notifText);
 				i.putExtra("clockVisible", true);
 				i.putExtra("clockIconName", iconName);
-
+				i.putExtra("clockNotification", notification);
+				
+				
 				sendBroadcast(i);
 			}
 		}
@@ -156,6 +162,7 @@ public class NLService extends NotificationListenerService {
 			i.putExtra("clockStatus",
 					NLService.this.getResources().getString(R.string.security_error_body));
 			i.putExtra("clockVisible", true);
+			i.putExtra("clockIconName", "ic_error_icon");
 			sendBroadcast(i);
 		}
 	}

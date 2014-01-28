@@ -67,6 +67,15 @@
             android:label="@string/title_activity_main" >
            
         </activity>
+        
+        <activity
+            android:name="me.onetwothreecode.timerDash.PendingIntentLauncherActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.Holo.Dialog"
+             >
+           
+        </activity>
+        
     </application>
 
 </manifest>
