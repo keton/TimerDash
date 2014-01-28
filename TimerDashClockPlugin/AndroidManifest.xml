@@ -72,6 +72,7 @@
             android:name="me.onetwothreecode.timerDash.PendingIntentLauncherActivity"
             android:exported="true"
             android:theme="@android:style/Theme.Holo.Dialog"
+            android:excludeFromRecents="true"
              >
            
         </activity>
