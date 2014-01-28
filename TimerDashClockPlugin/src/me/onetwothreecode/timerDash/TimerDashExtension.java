@@ -1,7 +1,6 @@
 package me.onetwothreecode.timerDash;
 
 import android.app.Notification;
-import android.app.PendingIntent;
 import android.app.PendingIntent.CanceledException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -19,9 +18,11 @@ import com.google.android.apps.dashclock.api.ExtensionData;
 public class TimerDashExtension extends DashClockExtension {
 	private static final String TAG = "TimerDashExtension";
 
-	// public static final String PREF_NAME = "pref_name";
+	//BroadcastReciever for handling of notifications
 	private BroadcastReceiver messageReciever;
+	//BroadcastReciever that handles pendingIntent launches
 	private BroadcastReceiver clockReciever;
+	
 	// findClockImplementation() variables
 	// is true when we know what clock implementation user has
 	boolean foundClockImpl = false;
@@ -64,8 +65,10 @@ public class TimerDashExtension extends DashClockExtension {
 		// start notification listener service
 		this.startService(new Intent(getApplicationContext(), NLService.class));
 
-		// determine
+		// determine what clock implemetation user has
 		findClockImplementation();
+		
+		//register broadcast recievers
 		messageReciever = new NotificationReceiver();
 
 		registerReceiver(messageReciever, new IntentFilter(
@@ -73,7 +76,7 @@ public class TimerDashExtension extends DashClockExtension {
 		clockReciever=new ClockLaunchReceiver();
 		registerReceiver(clockReciever, new IntentFilter(
 				NLService.INTENT_LAUNCH_CLOCK));
-		// setUpdateWhenScreenOn(true);
+		
 	}
 
 	@Override
@@ -103,7 +106,8 @@ public class TimerDashExtension extends DashClockExtension {
 	}
 
 	class ClockLaunchReceiver extends BroadcastReceiver {
-
+		
+		//executed when user clicks on extension
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
@@ -127,12 +131,12 @@ public class TimerDashExtension extends DashClockExtension {
 					.visible(intent.getBooleanExtra("clockVisible", false))
 
 					.status(intent.getStringExtra("clockTitle"))
-					// .expandedTitle(intent.getStringExtra("clockTitle") +
-					// " "+intent.getStringExtra("clockStatus") )
 					.expandedBody(intent.getStringExtra("clockStatus"));
 
 			String iconResName = intent.getStringExtra("clockIconName");
-
+			
+			
+			//check if new clock notification was posted, store reference
 			if (intent.hasExtra("clockNotification")) 
 			{
 			Log.d(TAG, "clockNotification detected");
@@ -217,6 +221,7 @@ public class TimerDashExtension extends DashClockExtension {
 			String className = clockImpls[i][2];
 			try {
 				ComponentName cn = new ComponentName(packageName, className);
+				@SuppressWarnings("unused")
 				ActivityInfo aInfo = packageManager.getActivityInfo(cn,
 						PackageManager.GET_META_DATA);
 				alarmClockIntent.setComponent(cn);

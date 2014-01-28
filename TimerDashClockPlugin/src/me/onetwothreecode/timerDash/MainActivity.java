@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.app.Activity;
 import android.content.Intent;
 
-
+//activity for extension settings
 public class MainActivity extends Activity {
 
 	Button securitySettingsButton;
