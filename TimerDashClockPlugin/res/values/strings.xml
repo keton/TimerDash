@@ -17,7 +17,7 @@
 
 <!DOCTYPE resources [
   <!ENTITY app_name "TimerDash">
-  <!ENTITY service_name "TimerDash Watch Service">
+  <!ENTITY service_name "TimerDash notification watcher service">
   
 ]>
 
@@ -28,11 +28,9 @@
     <string name="extension_description">Displays progress of the system timer</string>
     <string name="service_name">&service_name;</string>
     <string name="title_activity_main">TimerDash Setup</string>
-    <string name="security_settings_explanation">In order to receive notifications &app_name; needs special premissions. Please click button below and enable &service_name; on the list.</string>
+    <string name="security_settings_explanation">In order to receive notifications &app_name; needs activation of system service. Please click button below and enable &service_name; on the list.</string>
     <string name="permissions_button_text">Enable notification listener service</string>
-    <string name="dont_forget_string">Don\'t forget to add &app_name; to your DeskClock!</string>
-    <string name="hide_icon_button_text">Hide launcher icon</string>
-    <string name="hide_icon_description">Click the button below to hide &app_name; from launcher. This may require reboot.</string>
-    
+    <string name="security_error_title">&app_name; hasn\'t been setup</string>
+    <string name="security_error_body">Please follow instructions in the plugin settings page</string>
 
 </resources>

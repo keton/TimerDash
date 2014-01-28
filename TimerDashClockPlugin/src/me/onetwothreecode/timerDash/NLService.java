@@ -152,9 +152,9 @@ public class NLService extends NotificationListenerService {
 		public void showSecurityError() {
 			Intent i = new Intent(NLService.INTENT_NOTIFY_EXTENSION);
 
-			i.putExtra("clockTitle", "Security error");
+			i.putExtra("clockTitle", NLService.this.getResources().getString(R.string.security_error_title));
 			i.putExtra("clockStatus",
-					"Please follow instructions in plugin settings");
+					NLService.this.getResources().getString(R.string.security_error_body));
 			i.putExtra("clockVisible", true);
 			sendBroadcast(i);
 		}

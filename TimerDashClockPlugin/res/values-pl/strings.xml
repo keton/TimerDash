@@ -17,7 +17,7 @@
 
 <!DOCTYPE resources [
   <!ENTITY app_name "TimerDash">
-  <!ENTITY service_name "Usługa TimerDash">
+  <!ENTITY service_name "Usługa śledzenia powiadomień TimerDash">
   
 ]>
 
@@ -30,7 +30,9 @@
     <string name="title_activity_main">Ustawienia &app_name;</string>
     <string name="security_settings_explanation">Aby &app_name; działał potrzebne są dodatkowe uprawnienia. Kliknij na poniższy przycisk i zaznacz "&service_name;" na liście.</string>
     <string name="permissions_button_text">Włącz usługę śledzenia powiadomień</string>
-   
+   	<string name="security_error_title">&app_name; nie jest skonfigurowany</string>
+    <string name="security_error_body">Wykonaj działania zgodnie z instrukcją w ustawieniach pluginu</string>
+    
     
 
 </resources>
