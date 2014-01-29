@@ -17,7 +17,7 @@
 
 <!DOCTYPE resources [
   <!ENTITY app_name "TimerDash">
-  <!ENTITY service_name "TimerDash notification watcher service">
+  <!ENTITY service_name "TimerDash service">
   
 ]>
 
@@ -25,12 +25,12 @@
 
     <string name="app_name">&app_name;</string>
     <string name="extension_title">DashClock Timer Extension</string>
-    <string name="extension_description">Displays progress of the system timer</string>
+    <string name="extension_description">Displays status of the system timer and alarms</string>
     <string name="service_name">&service_name;</string>
     <string name="title_activity_main">TimerDash Setup</string>
-    <string name="security_settings_explanation">In order to receive notifications &app_name; needs activation of system service. Please click button below and enable &service_name; on the list.</string>
+    <string name="security_settings_explanation">In order to receive notifications &app_name; needs activation of system service. Please tap button below and enable &service_name; on the list.</string>
     <string name="permissions_button_text">Enable notification listener service</string>
     <string name="security_error_title">&app_name; hasn\'t been setup</string>
-    <string name="security_error_body">Please follow instructions in the plugin settings page</string>
+    <string name="security_error_body">Tap here and follow on-screen instructions</string>
 
 </resources>
