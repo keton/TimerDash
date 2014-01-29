@@ -108,15 +108,9 @@ public class NLService extends NotificationListenerService {
 				Log.e(TAG, "Clock icon resource id " + iconResId + " not found");
 			}
 
-			if (TimerDashExtension.TimerNotificationType.fromString(iconName) != TimerDashExtension.TimerNotificationType.STOPWATCH) {
-				Intent i = new Intent(
-						NLService.INTENT_NOTIFY_EXTENSION);
-
-				i.putExtra("clockTitle", "Paused");
-				i.putExtra("clockStatus", "");
-				i.putExtra("clockVisible", false);
-				sendBroadcast(i);
-				
+			if (TimerDashExtension.TimerNotificationType.fromString(iconName) != TimerDashExtension.TimerNotificationType.STOPWATCH) 
+			{
+				nlservicereciver.hideClockNotification();
 				// handle multiple clock notifications
 				for (StatusBarNotification sbn2 : NLService.this
 						.getActiveNotifications()) {
@@ -137,18 +131,22 @@ public class NLService extends NotificationListenerService {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			if (intent.getStringExtra("command").equals("list")) {
-
+				boolean hasClockNotifications=false;
 				try {
 					for (StatusBarNotification sbn : NLService.this
 							.getActiveNotifications())
 
 						if (sbn.getPackageName().equalsIgnoreCase(
 								"com.android.deskclock")) {
+							hasClockNotifications=true;
 							NLService.this.onNotificationPosted(sbn);
 						}
+					
+					if (!hasClockNotifications) this.hideClockNotification();
 				} catch (Exception e) {
 					showSecurityError();
 				}
+				
 			}
 
 		}
@@ -161,6 +159,16 @@ public class NLService extends NotificationListenerService {
 					NLService.this.getResources().getString(R.string.security_error_body));
 			i.putExtra("clockVisible", true);
 			i.putExtra("clockIconName", "ic_error_icon");
+			sendBroadcast(i);
+		}
+		public void hideClockNotification()
+		{
+			Intent i = new Intent(
+					NLService.INTENT_NOTIFY_EXTENSION);
+
+			i.putExtra("clockTitle", "Paused");
+			i.putExtra("clockStatus", "");
+			i.putExtra("clockVisible", false);
 			sendBroadcast(i);
 		}
 	}

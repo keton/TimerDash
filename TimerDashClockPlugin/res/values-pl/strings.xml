@@ -17,7 +17,7 @@
 
 <!DOCTYPE resources [
   <!ENTITY app_name "TimerDash">
-  <!ENTITY service_name "Usługa śledzenia powiadomień TimerDash">
+  <!ENTITY service_name "Usługa TimerDash">
   
 ]>
 

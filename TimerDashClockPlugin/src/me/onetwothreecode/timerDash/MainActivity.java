@@ -38,13 +38,11 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Log.d(TAG,"onActivityResult");
-		Intent i = new Intent(NLService.INTENT_NOTIFY_EXTENSION);
-
-		i.putExtra("clockTitle", "");
-		i.putExtra("clockStatus",
-				"");
-		i.putExtra("clockVisible", false);
+		
+		Intent i = new Intent(NLService.INTENT_NOTIFY_SERVICE);
+		i.putExtra("command", "list");
 		sendBroadcast(i);
+		finish();
 		
 	}
 
